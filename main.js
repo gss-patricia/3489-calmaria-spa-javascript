@@ -8,5 +8,12 @@ document.querySelectorAll(".cabecalho__lista-item").forEach(
     // adicionar um ouvinte mouseout
     item.addEventListener("mouseout", () => alternarSubmenu(item, false));
 
-    })
+    item.addEventListener("click", () => {
+        const submenu = item.querySelector(".submenu");
+
+        const isDisplayed = submenu.style.display === "block";
+
+        alternarSubmenu(item, !isDisplayed);
+    });
+  })
 );
