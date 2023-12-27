@@ -8,6 +8,27 @@ function gerenciarFocoModal(modalId) {
   const ultimoElemento = elementosModal[elementosModal.length - 1];
 
   primeiroElemento.focus();
+
+  modal.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      if (event.shiftKey) {
+        //Se a tecla Shift+tab for pressionada, e o foco estiver no primeiro elemento, mover para o ultimo
+        if (document.activeElement === primeiroElemento) {
+          event.preventDefault();
+          ultimoElemento.focus();
+        }
+      } else {
+        //Se a tecla Tab for pressionada, e o foco estiver no ultimo, mover para o primeiro
+        if (
+          document.activeElement === ultimoElemento ||
+          !modal.contains(document.activeElement)
+        ) {
+          event.preventDefault();
+          primeiroElemento.focus();
+        }
+      }
+    }
+  });
 }
 
 function alternarModal(modalId, abrir) {
